@@ -7,6 +7,7 @@ public abstract class Marsupial extends Animal {
 	public Marsupial(String nom) {
 		super(nom);
 		this.cSommeil = new SommeilNid();
+		this.estReveille=true;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -19,6 +20,18 @@ public abstract class Marsupial extends Animal {
 	public abstract void dormir();
 	
 	public abstract void seReveiller();
+	
+	public void changerEtat()
+	{
+		if(this.estReveille)
+		{
+			this.dormir();
+			this.estReveille=false;
+		} else {
+			this.seReveiller();
+			this.estReveille=true;
+		}
+	}
 	
 	public Boolean getEstReveille() {
 		return estReveille;

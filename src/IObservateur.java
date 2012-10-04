@@ -1,4 +1,4 @@
 
 public interface IObservateur {
-	public void actualiser(IObservable obs);
+	public void actualiser(Marsupial marsu);
 }

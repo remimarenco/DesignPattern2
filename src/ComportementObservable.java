@@ -2,22 +2,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ComportementObservable implements IComportementObservable {
-	List<Observateur> listeObs;
+public class ComportementObservable implements IObservable {
+	
+	List<IObservateur> listeObs;
+	Marsupial marsupial;
 	
 	public ComportementObservable()
 	{
-		listeObs = new ArrayList<Observateur>();
+		listeObs = new ArrayList<IObservateur>();
 	}
 	
 	@Override
-	public void ajouterObservateur(Observateur obs) {
+	public void ajouterObservateur(IObservateur obs) {
 		// TODO Auto-generated method stub
 		listeObs.add(obs);
 	}
 
 	@Override
-	public void supprimerObservateur(Observateur obs) {
+	public void supprimerObservateur(IObservateur obs) {
 		// TODO Auto-generated method stub
 		listeObs.remove(obs);
 	}
@@ -25,10 +27,18 @@ public class ComportementObservable implements IComportementObservable {
 	@Override
 	public void notifierObservateurs() {
 		// TODO Auto-generated method stub
-		for(Observateur obs: listeObs)
+		for(IObservateur obs: listeObs)
 		{
-			obs.actualiser(this);
+			obs.actualiser(marsupial);
 		}
+	}
+
+	public Marsupial getMarsupial() {
+		return marsupial;
+	}
+
+	public void setMarsupial(Marsupial marsu) {
+		this.marsupial = marsu;
 	}
 
 }

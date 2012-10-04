@@ -2,34 +2,43 @@
 public abstract class Marsupial extends Animal {
 	protected ComportementSommeil cSommeil;
 	
-	private Boolean estReveille;
+	protected Boolean estReveille;
 
 	public Marsupial(String nom) {
 		super(nom);
+		
+		//on donne un comportement par defaut au marsupial
 		this.cSommeil = new SommeilNid();
 		this.estReveille=true;
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public Marsupial(String nom, ComportementSommeil cSommeil) {
 		super(nom);
 		this.cSommeil = cSommeil;
-		// TODO Auto-generated constructor stub
 	}
-	
-	public abstract void dormir();
-	
-	public abstract void seReveiller();
-	
+
+	//change la variable d'etat du marsu
 	public void changerEtat()
 	{
 		if(this.estReveille)
 		{
-			this.dormir();
 			this.estReveille=false;
 		} else {
-			this.seReveiller();
 			this.estReveille=true;
+		}
+	}
+	
+	//renvoie le libellé de l'etat du marsu
+	public String getLibelleEtat()
+	{
+		if(this.estReveille)
+		{
+			return this.cSommeil.dormir();
+
+		} else {
+			return this.cSommeil.seReveiller();
+
 		}
 	}
 	

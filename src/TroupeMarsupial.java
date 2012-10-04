@@ -9,31 +9,27 @@ public class TroupeMarsupial extends Marsupial {
 	
 	public TroupeMarsupial(String nom) {
 		super(nom);
-		// TODO Auto-generated constructor stub
 	}
 
 	public TroupeMarsupial(String nom, ComportementSommeil cSommeil) {
 		super(nom, cSommeil);
-		// TODO Auto-generated constructor stub
 	}
 	
-	public void dormir(){
-		for (Marsupial marsu : marsupiaux)
-		{
-			marsu.dormir();
-		}
-	}
 
-	public void seReveiller(){
+	public void changerEtat(){
 		for (Marsupial marsu : marsupiaux)
 		{
-			marsu.seReveiller();
+			marsu.changerEtat();
 		}
 	}
 	
 	public boolean ajouteMarsupial(Marsupial marsu) {
 		return marsupiaux.add(marsu);
-		}
-
+	}
+	
+	public void setMarsupiaux(List<Marsupial> listMarsupiaux)
+	{
+		this.marsupiaux=listMarsupiaux;
+	}
 	
 }

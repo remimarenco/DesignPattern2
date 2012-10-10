@@ -12,12 +12,12 @@ public class TestZoo {
 		System.out.println("\n******************************Test Marsupial application******************************");
 
 		//on declare la factory
-		MarsupialFactory factory= new MarsupialFactory();
+		MarsupialFactory factory = MarsupialFactory.getInstance();
 		
 		//on recupere des marsupial depuis la factory
-		MarsupialObservable bernard=factory.getKoala("Bernard le koala");
-		MarsupialObservable  jean=factory.getKoala("Jean le mammouth");
-		MarsupialObservable  remi=factory.getKoala("Remi l'oppossum");
+		MarsupialObservable bernard = factory.getKoala("Bernard le koala");
+		MarsupialObservable jean = factory.getMammouth("Jean le mammouth");
+		MarsupialObservable remi = factory.getOpossum("Remi l'oppossum");
 		
 		
 		//pas d'obervateur donc aucun affichage
@@ -35,12 +35,10 @@ public class TestZoo {
 		marsupiaux.add(remi);
 		
 		//on creait une troupe grace à la factory en lui passant la liste en parametre
-		MarsupialObservable troupe=factory.getTroupe("Troupe",marsupiaux);
+		MarsupialObservable troupe = factory.getTroupe("Troupe",marsupiaux);
 		
 		//on change l'etat de toute la troupe
 		troupe.changerEtat();
-		
-		
 	}
 
 }

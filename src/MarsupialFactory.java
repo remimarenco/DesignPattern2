@@ -2,8 +2,22 @@ import java.util.List;
 
 
 public class MarsupialFactory implements IMarsupialArboricolFactory {
-
-
+	// On partage une variable entre les instances de la classe MarsupialFactory
+	private static MarsupialFactory instance;
+	
+	// On met en private le constructeur de la classe pour éviter son appel
+	private MarsupialFactory(){
+	}
+	
+	// La création d'une classe MarsupialFactory n'est possible qu'au travers de cette méthode
+	// Elle retourne l'actuelle instance si on avait déjà créé l'objet
+	public static MarsupialFactory getInstance(){
+		if(instance == null)
+		{
+			instance = new MarsupialFactory();
+		}
+		return instance;
+	}
 
 	@Override
 	public MarsupialObservable getKoala(String nom) {

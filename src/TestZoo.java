@@ -43,6 +43,11 @@ public class TestZoo {
 		troupe.changerEtat();
 		
 		Inspecteur.Invoquer(bernard, "changerEtat", bernard, null);
+		troupe.changerEtat();
+		
+		Koala toto= (Koala) Inspecteur.getAnimal("Koala", "Bernard le koala");
+		
+		System.out.println(bernard.getNom());
 	}
 
 }

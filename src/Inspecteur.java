@@ -80,7 +80,7 @@ public class Inspecteur {
 	{
 		Object instance = null;
 		try {
-			Class facto = Class.forName(nomFabrique);
+			Class<?> facto = Class.forName(nomFabrique);
 			Method[] methods = facto.getMethods();
 			for(Method method : methods)
 			{
@@ -90,6 +90,16 @@ public class Inspecteur {
 						// Vérification si on passe par un Singleton
 						if(facto.getConstructors().length == 0){
 							objFactory = facto.getMethod("getInstance", null).invoke(null, null);
+						}
+						// Sinon on prends le constructeur par défaut
+						else
+						{
+							try {
+								objFactory = facto.getConstructor().newInstance();
+							} catch (InstantiationException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 						instance = method.invoke(objFactory, args);
 					} catch (IllegalArgumentException e) {
@@ -122,18 +132,13 @@ public class Inspecteur {
 	{
 		Object instance = null;
 		try {
-			Class facto = fabrique.getClass();
+			Class<?> facto = fabrique.getClass();
 			Method[] methods = facto.getMethods();
 			for(Method method : methods)
 			{
 				if(method.getName().contains(nomObjetAFabriquer)){
 					try {
-						Object objFactory = null;
-						// Vérification si on passe par un Singleton
-						if(facto.getConstructors().length == 0){
-							objFactory = facto.getMethod("getInstance", null).invoke(null, null);
-						}
-						instance = method.invoke(objFactory, args);
+						instance = method.invoke(fabrique, args);
 					} catch (IllegalArgumentException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -144,9 +149,6 @@ public class Inspecteur {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (SecurityException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (NoSuchMethodException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

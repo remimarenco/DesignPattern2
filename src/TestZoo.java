@@ -13,7 +13,7 @@ public class TestZoo {
 		System.out.println("\n******************************Test Marsupial application******************************");
 
 		//on declare la factory
-		MarsupialFactory factory = MarsupialFactory.getInstance();
+		/*MarsupialFactory factory = MarsupialFactory.getInstance();
 		
 		//on recupere des marsupial depuis la factory
 		MarsupialObservable bernard = factory.getKoala("Bernard le koala");
@@ -39,7 +39,12 @@ public class TestZoo {
 		MarsupialObservable troupe = factory.getTroupe("Troupe",marsupiaux);
 		
 		//on change l'etat de toute la troupe
-		troupe.changerEtat();		
+		troupe.changerEtat();*/
+		
+		Inspecteur gadget=new Inspecteur();
+		Koala bernard= (Koala) gadget.getAnimal("Koala", "Bernard le koala");
+		
+		System.out.println(bernard.getNom());
 	}
 
 }

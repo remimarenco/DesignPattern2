@@ -2,34 +2,68 @@ import java.lang.reflect.*;
 import java.lang.Class;
 
 public class Inspecteur {
-	// On �vite de pouvoir instancier la classe
+	// On �vite de pouvoir instancier la classe
 	private Inspecteur(){
 	}
 	
-	public static Object getAnimal(String className, String name)
+	
+	
+	public static Object getObject(String className, Object[] args)
 	{
 		
-		Class animal;
-		Constructor constructeur = null;
+		Class obj;
+		Constructor[] constructeurs;//tableau de constructeur
 		Object result=null;
-		
+		int nbrArg= args.length;
+		int indice=0;
 		try {
 			
 			//on récupere la classe
-			animal=Class.forName(className);
+			obj=Class.forName(className);
 			
-			//on récupere le constructeur
-			constructeur=animal.getConstructor(String.class);
-			//on récupere l'objet
-			result=constructeur.newInstance(name);
+			
+			//on récupere les constructeurs
+			constructeurs=obj.getConstructors();	
+
+			
+			//on parcout tous les constructeurs
+			for(Constructor constructeur : constructeurs)	
+			{	
+				//si le constructeur a le meme nombre de parametres que ceux passer a la fonction
+				if(constructeur.getParameterTypes().length==nbrArg)
+				{
+					//on récupere les arguments de ce constructeur
+					Class[] argsConstructeur=constructeur.getParameterTypes();
+					
+					//on initialse un booléen qui servira pour verifier que tous les parametres sont correctes
+					boolean estCorrect=true;
+					
+					//on parcout tous les arguments pour les comparer 
+					for(indice=0;indice<nbrArg;indice++)
+					{
+								
+						//si un des arguments ne correcpond pas on mais le booléen a faux
+						if(args[indice].getClass() != argsConstructeur[indice])
+						{
+							estCorrect=false;
+						}
+					}
+					
+					//si le constructeur correcpond on appelle le constructeur
+					if(estCorrect)
+					{
+						//on récupere l'objet
+						result=constructeur.newInstance(args);
+						break;
+					}
+				}
+			}	
+
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			// erreur securié
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// le constructeur n'existe pas
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -43,7 +77,7 @@ public class Inspecteur {
 		} catch (InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		
 		return result;
 		

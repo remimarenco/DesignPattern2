@@ -1,5 +1,6 @@
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,20 @@ public class TestZoo {
 
 		//on declare la factory
 		MarsupialFactory factory = MarsupialFactory.getInstance();
+		
+		Object[] obj = {"Hedi le petit Koala"};
+		
+		MarsupialObservable titi = (MarsupialObservable) Inspecteur.getInstanceFromFabrique("MarsupialFactory", "Koala", obj);
+		
+		titi.ajouterObservateur(new Console());
+		titi.changerEtat();
+		
+		Object[] obj2 = {"Morgan le grand Koala"};
+		
+		MarsupialObservable tata = (MarsupialObservable) Inspecteur.getInstanceFromFabrique(factory, "Koala", obj2);
+		
+		tata.ajouterObservateur(new Console());
+		tata.changerEtat();
 		
 		//on recupere des marsupial depuis la factory
 		MarsupialObservable bernard = factory.getKoala("Bernard le koala");
@@ -42,12 +57,19 @@ public class TestZoo {
 		//on change l'etat de toute la troupe
 		troupe.changerEtat();
 		
-		Inspecteur.Invoquer(bernard, "changerEtat", bernard, null);
+		Inspecteur.Invoquer(bernard, "changerEtat", null);
 		troupe.changerEtat();
-		Object[] args1={"Patrick le Koala"};
-		Object partrick=Inspecteur.getObject("Koala",args1);
-		System.out.println(((Animal) partrick).getNom());
-	
+
+		
+		Koala toto= (Koala) Inspecteur.getAnimal("Koala", "Bernard le koala");
+		
+		Object[] args2 = {"Inspecteur Opossum"};
+		
+		Opossum marsuB = (Opossum) Inspecteur.getObject("Opossum", args2);
+		
+		System.out.println(marsuB.getNom());
+		
+		System.out.println(bernard.getNom());
 
 	}
 

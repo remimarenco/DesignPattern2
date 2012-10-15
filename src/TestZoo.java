@@ -1,3 +1,4 @@
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class TestZoo {
 		MarsupialObservable troupe = factory.getTroupe("Troupe",marsupiaux);
 		
 		//on change l'etat de toute la troupe
-		troupe.changerEtat();
+		troupe.changerEtat();		
 	}
 
 }

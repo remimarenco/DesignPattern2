@@ -196,7 +196,7 @@ public class Inspecteur {
                                     {
 
                                             //si un des arguments ne correcpond pas on mais le booléen a faux
-                                            if(args[indice].getClass() != argsConstructeur[indice])
+                                            if(!args[indice].getClass().isAssignableFrom(argsConstructeur[indice]))
                                             {
                                                     estCorrect=false;
                                             }

@@ -1,8 +1,9 @@
+
 import java.lang.reflect.*;
 import java.lang.Class;
 
 public class Inspecteur {
-	// On évite de pouvoir instancier la classe
+	// On ï¿½vite de pouvoir instancier la classe
 	private Inspecteur(){
 	}
 	
@@ -87,11 +88,11 @@ public class Inspecteur {
 				if(method.getName().contains(nomObjetAFabriquer)){
 					try {
 						Object objFactory = null;
-						// Vérification si on passe par un Singleton
+						// Vï¿½rification si on passe par un Singleton
 						if(facto.getConstructors().length == 0){
 							objFactory = facto.getMethod("getInstance", null).invoke(null, null);
 						}
-						// Sinon on prends le constructeur par défaut
+						// Sinon on prends le constructeur par dï¿½faut
 						else
 						{
 							try {
@@ -171,11 +172,11 @@ public class Inspecteur {
             int indice=0;
             try {
 
-                    //on récupere la classe
+                    //on rï¿½cupere la classe
                     obj=Class.forName(className);
 
 
-                    //on récupere les constructeurs
+                    //on rï¿½cupere les constructeurs
                     constructeurs=obj.getConstructors();
 
 
@@ -185,16 +186,15 @@ public class Inspecteur {
                             //si le constructeur a le meme nombre de parametres que ceux passer a la fonction
                             if(constructeur.getParameterTypes().length==nbrArg)
                             {
-                                    //on récupere les arguments de ce constructeur
+                                    //on rï¿½cupere les arguments de ce constructeur
                                     Class[] argsConstructeur=constructeur.getParameterTypes();
 
-                                    //on initialse un booléen qui servira pour verifier que tous les parametres sont correctes
+                                    //on initialse un boolï¿½en qui servira pour verifier que tous les parametres sont correctes
                                     boolean estCorrect=true;
 
                                     //on parcout tous les arguments pour les comparer
                                     for(indice=0;indice<nbrArg;indice++)
                                     {
-
                                             //si un des arguments ne correcpond pas on mais le booléen a faux
                                             if(!args[indice].getClass().isAssignableFrom(argsConstructeur[indice]))
                                             {
@@ -205,7 +205,7 @@ public class Inspecteur {
                                     //si le constructeur correcpond on appelle le constructeur
                                     if(estCorrect)
                                     {
-                                            //on récupere l'objet
+                                            //on rï¿½cupere l'objet
                                             result=constructeur.newInstance(args);
                                             break;
                                     }
@@ -216,7 +216,7 @@ public class Inspecteur {
             } catch (ClassNotFoundException e) {
                     e.printStackTrace();
             } catch (SecurityException e) {
-                    // erreur securié
+                    // erreur securiï¿½
                     e.printStackTrace();
             } catch (IllegalArgumentException e) {
                     // TODO Auto-generated catch block
@@ -236,3 +236,4 @@ public class Inspecteur {
 
     }
 }
+

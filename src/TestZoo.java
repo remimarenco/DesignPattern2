@@ -59,9 +59,6 @@ public class TestZoo {
 		
 		Inspecteur.Invoquer(bernard, "changerEtat", null);
 		troupe.changerEtat();
-
-		
-		Koala toto= (Koala) Inspecteur.getAnimal("Koala", "Bernard le koala");
 		
 		Object[] args2 = {"Inspecteur Opossum"};
 		

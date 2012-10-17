@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -67,7 +70,8 @@ public class TestZoo {
 		System.out.println(marsuB.getNom());
 		
 		System.out.println(bernard.getNom());
-
+		
+		Mediator mediator = new Mediator();
 	}
 
 }

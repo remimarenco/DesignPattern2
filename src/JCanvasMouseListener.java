@@ -6,12 +6,10 @@ import javax.swing.SwingUtilities;
 
 public abstract class JCanvasMouseListener extends MouseAdapter {
 	protected JCanvas canvas;
-	protected Mediator mediator;
 
-	public JCanvasMouseListener(JCanvas canvas, Mediator mediator) {
+	public JCanvasMouseListener(JCanvas canvas) {
 		super();
 		this.canvas = canvas;
-		this.mediator = mediator;
 		canvas.addMouseListener(this);
 		canvas.addMouseMotionListener(this);
 	}

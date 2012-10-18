@@ -14,19 +14,16 @@ public class ComportementObservable implements IObservable {
 	
 	@Override
 	public void ajouterObservateur(IObservateur obs) {
-		// TODO Auto-generated method stub
 		listeObs.add(obs);
 	}
 
 	@Override
 	public void supprimerObservateur(IObservateur obs) {
-		// TODO Auto-generated method stub
 		listeObs.remove(obs);
 	}
 
 	@Override
 	public void notifierObservateurs() {
-		// TODO Auto-generated method stub
 		for(IObservateur obs: listeObs)
 		{
 			obs.actualiser(marsupial);

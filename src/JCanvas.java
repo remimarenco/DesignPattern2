@@ -12,8 +12,10 @@ import java.util.List;
 import javax.swing.JPanel;
 
 
-public class JCanvas extends JPanel{
+public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateur{
 	protected Mediator mediator;
+	protected IMovableDrawable drawable;
+	protected Point initialLocation;
 	
 	public JCanvas(Mediator mediator)
 	{
@@ -21,8 +23,6 @@ public class JCanvas extends JPanel{
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(400, 200));
 		Dimension dim = new Dimension(40, 40);
-		new SimpleMouseListener(this, mediator);
-		new NonOverlapMoveAdapter(this, mediator);
 		GUIHelper.showOnFrame(this, "JCanvas");
 	}
 	
@@ -115,5 +115,46 @@ public class JCanvas extends JPanel{
 
 	public void changerCouleur(FormDrawable drawableM, Color color) {
 		drawableM.color = color;
+	}
+	
+	// ---------- Evenements de souris ----------- //
+
+	@Override
+	public void actualiser(Object objet) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e, IMovableDrawable d, Point p) {
+		// TODO Auto-generated method stub
+		if(drawable == null) return ;
+		if( !this.isAlone(drawable)){
+			drawable.setPosition(initialLocation);
+		}
+		initialLocation = null;
+		drawable = null;
+		this.repaint();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e, IMovableDrawable d, Point p) {
+		// TODO Auto-generated method stub
+		List selectedDrawables = this.findDrawables(e.getPoint());
+		if (selectedDrawables.size() == 0)
+			return;
+		drawable = (IMovableDrawable) selectedDrawables.get(0);
+		if(drawable!=null) {
+			initialLocation=drawable.getPosition();
+		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e, IMovableDrawable d) {
+		// TODO Auto-generated method stub
+		if (drawable != null) {
+			drawable.setPosition(e.getPoint());
+			this.repaint();
+		}
 	}
 }

@@ -1,5 +1,5 @@
 
-public class Console implements IObservateur{
+public class Console implements IObservateurMarsupial{
 
 
 	public void actualiser(Marsupial marsu) {
@@ -7,5 +7,7 @@ public class Console implements IObservateur{
 		
 	}
 
-	
+	@Override
+	public void actualiser(Object objet) {		
+	}	
 }

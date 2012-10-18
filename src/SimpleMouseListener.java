@@ -5,20 +5,14 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 
-public class SimpleMouseListener extends JCanvasMouseListener {
-	public SimpleMouseListener(JCanvas canvas, Mediator mediator) {
-		super(canvas, mediator);
+public abstract class SimpleMouseListener extends JCanvasMouseListener {
+	public SimpleMouseListener(JCanvas canvas) {
+		super(canvas);
 	}
 
 	protected void rightClickAction(MouseEvent e) {
-		mediator.rightClickAction(e);
 	}
 
 	protected void leftClickAction(MouseEvent e) {
-		
-		mediator.leftClickAction(e);
-	
-	}
-
-	
+	}	
 }

@@ -12,6 +12,7 @@ public class Mediator implements ISimpleMouseObservateur, INonOverlapMouseAdapte
 	protected List<MarsupialDrawable> lMarsupialDrawable = new ArrayList<MarsupialDrawable>();
 	protected List<INonOverlapMouseAdapterObservateur> nomaObs = new ArrayList<INonOverlapMouseAdapterObservateur>();
 	protected JCanvas jc;
+	protected Fenetre fenetre;
 	
 	public Mediator(){		
 		//on créait la fenetre

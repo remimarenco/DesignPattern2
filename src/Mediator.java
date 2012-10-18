@@ -27,7 +27,11 @@ public class Mediator implements ISimpleMouseObservateur, INonOverlapMouseAdapte
 		
 		this.ajouterObservateur(jc);
 		
-		JCanvas jc2 = new JCanvas(this);
+		//on créait la fenetre
+		Fenetre fenetre2=new Fenetre(this);
+				
+		//onrécupere le JCanvas de la fenetre
+		JCanvas jc2 = fenetre2.getCanvas();
 		this.ajouterObservateur(jc2);
 	}
 	

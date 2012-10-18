@@ -17,12 +17,6 @@ public class Mediator {
 		listeObs = new ArrayList<IObservateur>();
 		
 		jc = new JCanvas(this);
-		jc.setBackground(Color.WHITE);
-		jc.setPreferredSize(new Dimension(400, 200));
-		Dimension dim = new Dimension(40, 40);
-		new SimpleMouseListener(jc, this);
-		new NonOverlapMoveAdapter(jc, this);
-		GUIHelper.showOnFrame(jc, "test JCanvas");
 	}
 	
 	public JCanvas getCanvas()

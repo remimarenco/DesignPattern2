@@ -1,6 +1,6 @@
 
 public 
-class MarsupialObservable  extends Marsupial implements IObservable{
+class MarsupialObservable extends Marsupial implements IObservable{
 	protected ComportementObservable cObservable;
 	protected Marsupial marsupial;
 	

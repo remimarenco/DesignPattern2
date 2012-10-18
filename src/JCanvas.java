@@ -18,6 +18,12 @@ public class JCanvas extends JPanel{
 	public JCanvas(Mediator mediator)
 	{
 		this.mediator = mediator;
+		this.setBackground(Color.WHITE);
+		this.setPreferredSize(new Dimension(400, 200));
+		Dimension dim = new Dimension(40, 40);
+		new SimpleMouseListener(this, mediator);
+		new NonOverlapMoveAdapter(this, mediator);
+		GUIHelper.showOnFrame(this, "JCanvas");
 	}
 	
 	public void paint(Graphics g) {
@@ -108,7 +114,6 @@ public class JCanvas extends JPanel{
 	}
 
 	public void changerCouleur(FormDrawable drawableM, Color color) {
-		// TODO Auto-generated method stub
 		drawableM.color = color;
 	}
 }

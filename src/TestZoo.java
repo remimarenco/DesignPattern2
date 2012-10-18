@@ -18,7 +18,7 @@ public class TestZoo {
 		System.out.println("\n******************************Test Marsupial application******************************");
 
 		//on declare la factory
-		MarsupialFactory factory = MarsupialFactory.getInstance();
+		/*MarsupialFactory factory = MarsupialFactory.getInstance();
 		
 		Object[] obj = {"Hedi le petit Koala"};
 		
@@ -69,7 +69,7 @@ public class TestZoo {
 		
 		System.out.println(marsuB.getNom());
 		
-		System.out.println(bernard.getNom());
+		System.out.println(bernard.getNom());*/
 		
 		Mediator mediator = new Mediator();
 	}

@@ -14,7 +14,11 @@ public class Mediator implements ISimpleMouseObservateur, INonOverlapMouseAdapte
 	protected JCanvas jc;
 	
 	public Mediator(){		
-		jc = new JCanvas(this);
+		//on créait la fenetre
+		fenetre=new Fenetre(this);
+				
+		//onrécupere le JCanvas de la fenetre
+		jc = fenetre.getCanvas();
 		SimpleMouseListenerObservable smlo = new SimpleMouseListenerObservable(jc);
 		smlo.ajouterObservateur(this);
 		NonOverlapMoveAdapterObservable nomao = new NonOverlapMoveAdapterObservable(jc);
@@ -49,7 +53,7 @@ public class Mediator implements ISimpleMouseObservateur, INonOverlapMouseAdapte
 		}
 		else
 		{
-			// On change d'�tat
+			// On change d'�tat
 			MarsupialDrawable drawableM = (MarsupialDrawable) drawable;
 			Marsupial marsu = drawableM.getMarsupial();
 			marsu.changerEtat();

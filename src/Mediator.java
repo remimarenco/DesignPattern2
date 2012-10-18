@@ -12,11 +12,16 @@ public class Mediator {
 	protected List<MarsupialDrawable> lMarsupialDrawable = new ArrayList<MarsupialDrawable>();
 	protected JCanvas jc;
 	protected List<IObservateur> listeObs;
+	protected Fenetre fenetre;
 	
 	public Mediator(){
 		listeObs = new ArrayList<IObservateur>();
 		
-		jc = new JCanvas(this);
+		//on crÃ©ait la fenetre
+		fenetre=new Fenetre(this);
+		
+		//onrÃ©cupere le JCanvas de la fenetre
+		jc =fenetre.getCanvas();
 	}
 	
 	public JCanvas getCanvas()
@@ -25,7 +30,7 @@ public class Mediator {
 	}
 	
 	public void leftClickAction(MouseEvent e) {
-		// Demande de vérification si on a cliqué sur un objet existant ou non
+		// Demande de vï¿½rification si on a cliquï¿½ sur un objet existant ou non
 		IDrawable drawable = jc.getDrawableFromPoint(e.getPoint());
 		if(drawable == null)
 		{
@@ -33,7 +38,7 @@ public class Mediator {
 		}
 		else
 		{
-			// On change d'état
+			// On change d'ï¿½tat
 			MarsupialDrawable drawableM = (MarsupialDrawable) drawable;
 			Marsupial marsu = drawableM.getMarsupial();
 			marsu.changerEtat();
@@ -49,7 +54,7 @@ public class Mediator {
 	}
 
 	public void rightClickAction(MouseEvent e) {
-		// On récupère l'élèment drawable de la vue
+		// On rï¿½cupï¿½re l'ï¿½lï¿½ment drawable de la vue
 		jc.rightClickAction(e);
 
 		jc.actualiser();

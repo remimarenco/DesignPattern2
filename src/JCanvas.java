@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
@@ -9,6 +10,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -17,13 +21,15 @@ public class JCanvas extends JPanel{
 	
 	public JCanvas(Mediator mediator)
 	{
+		//on parametre le Jpanel
+		JPanel conteneur= new JPanel();
 		this.mediator = mediator;
 		this.setBackground(Color.WHITE);
-		this.setPreferredSize(new Dimension(400, 200));
-		Dimension dim = new Dimension(40, 40);
+		this.setPreferredSize(new Dimension(1000, 500));
+		
+		//on ajoute les listeners
 		new SimpleMouseListener(this, mediator);
 		new NonOverlapMoveAdapter(this, mediator);
-		GUIHelper.showOnFrame(this, "JCanvas");
 	}
 	
 	public void paint(Graphics g) {

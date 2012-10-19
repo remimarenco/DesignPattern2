@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateur{
+public class JCanvas extends JPanel implements ISimpleMouseObservateur,INonOverlapMouseAdapterObservateur{
 	protected Mediator mediator;
 	protected IMovableDrawable drawable;
 	protected Point initialLocation;
@@ -86,24 +86,19 @@ public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateu
 	protected void leftClickAction(MouseEvent e) {
 		Point p = e.getPoint();
 		/*IDrawable rect = createDrawable(e);
+=======
+		IDrawable rect = createDrawable(p);
+>>>>>>> cff80ee74faa82b1bdf2e848352587846fb4a4e7
 		if (this.isFree(rect.getRectangle())) {
 			this.addDrawable(rect);
 		}*/
 	}
 	
 	//TODO: Remettre en private
-	public IDrawable createDrawable(MouseEvent e,String nomC,String nomMarsu) {
-		Point p = e.getPoint();
+	public IDrawable createDrawable(Point p) {
 		Dimension dim = new Dimension(40, 40);
-		//on récupere le nom de la classe passez en parametre et on lui ajoute "Drawable"
-		String nomClasse=nomC+"Drawable";
-		
-		//on créait la liste d'argument pour l'inspecteur
-		Object[] args={Color.RED, p, dim,nomMarsu};
-		
-		//on créait un inspecteur puis on appelle la fonction getObject pour créait un marsu en fonction du nom de la classe
-		Inspecteur inspecteur=new Inspecteur();
-		return (IDrawable) inspecteur.getObject(nomClasse, args) ;
+
+		return new KoalaDrawable(null, p, dim, "");
 	}
 	
 	public IDrawable getDrawableFromPoint(Point p)
@@ -124,7 +119,7 @@ public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateu
 	}
 
 	public void rightClickAction(MouseEvent e) {		
-		mediator.lMarsupialDrawable.remove(getDrawableFromPoint(e.getPoint()));
+		
 	}
 
 	public void changerCouleur(FormDrawable drawableM, Color color) {
@@ -164,11 +159,28 @@ public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateu
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e, IMovableDrawable d) {
-		// TODO Auto-generated method stub
-		if (drawable != null) {
+	public void mouseDragged(MouseEvent e, IMovableDrawable d){
+		if(drawable != null)
+		{
 			drawable.setPosition(e.getPoint());
 			this.repaint();
 		}
 	}
+
+	@Override
+	public void leftClick(IDrawable e) {
+		// TODO Auto-generated method stub
+		if(this.isFree(drawable.getRectangle()))
+		{
+			this.addDrawable(drawable);
+		}
+	}
+
+	@Override
+	public void rightClick(IDrawable e) {
+		// TODO Auto-generated method stub
+		repaint();
+	}
+	
+	
 }

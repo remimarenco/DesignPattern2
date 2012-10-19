@@ -21,6 +21,7 @@ public class KoalaDrawable extends MarsupialDrawable {
 		Color c = g.getColor();
 		g.setColor(color);
 		g.fillOval(rect.x,rect.y,rect.height,rect.width);
+		g.drawString("Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",0,0);
 		g.setColor(c);
 	}
 

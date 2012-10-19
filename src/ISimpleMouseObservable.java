@@ -2,6 +2,6 @@ import java.awt.event.MouseEvent;
 
 
 public interface ISimpleMouseObservable extends IObservable {
-	public void notifierLeftClick(MouseEvent e);
-	public void notifierRightClick(MouseEvent e);
+	public void notifierLeftClick(IDrawable drawable);
+	public void notifierRightClick(IDrawable drawable);
 }

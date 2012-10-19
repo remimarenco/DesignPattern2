@@ -11,6 +11,7 @@ public abstract class  MarsupialDrawable extends FormDrawable {
 	
 	public MarsupialDrawable(Color color, Point pos, Dimension dim) {
 		super(color, pos, dim);
+		
 	}
 
 	//Fonction qui sera redefinie par les classe fille pour dessiné une forme en fonction de la race 

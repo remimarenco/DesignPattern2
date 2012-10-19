@@ -1,3 +1,4 @@
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,20 @@ public class SimpleMouseListenerObservable extends SimpleMouseListener implement
 	
 	protected void rightClickAction(MouseEvent e) {
 		super.rightClickAction(e);
-		notifierRightClick(e);
+		Point p = e.getPoint();
+		IDrawable drawable = canvas.getDrawableFromPoint(p);
+		notifierRightClick(drawable);
 	}
 
 	protected void leftClickAction(MouseEvent e) {
 		super.leftClickAction(e);
-		notifierLeftClick(e);
+		Point p = e.getPoint();
+		IDrawable drawable = canvas.getDrawableFromPoint(p);
+		if(drawable == null)
+		{
+			drawable = canvas.createDrawable(p);
+		}
+		notifierLeftClick(drawable);
 	}
 
 	@Override
@@ -39,19 +48,18 @@ public class SimpleMouseListenerObservable extends SimpleMouseListener implement
 	}
 
 	@Override
-	public void notifierLeftClick(MouseEvent e) {
+	public void notifierLeftClick(IDrawable drawable) {
 		for(ISimpleMouseObservateur obs : observateurs)
 		{
-			obs.leftClick(e);
+			obs.leftClick(drawable);
 		}
 	}
 
 	@Override
-	public void notifierRightClick(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void notifierRightClick(IDrawable drawable) {
 		for(ISimpleMouseObservateur obs : observateurs)
 		{
-			obs.rightClick(e);
+			obs.rightClick(drawable);
 		}
 	}
 

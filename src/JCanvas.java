@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateur{
+public class JCanvas extends JPanel implements ISimpleMouseObservateur,INonOverlapMouseAdapterObservateur{
 	protected Mediator mediator;
 	protected IMovableDrawable drawable;
 	protected Point initialLocation;
@@ -85,14 +85,13 @@ public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateu
 	
 	protected void leftClickAction(MouseEvent e) {
 		Point p = e.getPoint();
-		IDrawable rect = createDrawable(e);
+		IDrawable rect = createDrawable(p);
 		if (this.isFree(rect.getRectangle())) {
 			this.addDrawable(rect);
 		}
 	}
 	
-	private IDrawable createDrawable(MouseEvent e) {
-		Point p = e.getPoint();
+	public IDrawable createDrawable(Point p) {
 		Dimension dim = new Dimension(40, 40);
 		return new MarsupialDrawable(Color.RED, p, dim);
 	}
@@ -115,7 +114,7 @@ public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateu
 	}
 
 	public void rightClickAction(MouseEvent e) {		
-		mediator.lMarsupialDrawable.remove(getDrawableFromPoint(e.getPoint()));
+		
 	}
 
 	public void changerCouleur(FormDrawable drawableM, Color color) {
@@ -161,5 +160,18 @@ public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateu
 			drawable.setPosition(e.getPoint());
 			this.repaint();
 		}
+	}
+
+	@Override
+	public void leftClick(IDrawable drawable) {
+		if (this.isFree(drawable.getRectangle())) {
+			this.addDrawable(drawable);
+		}
+		repaint();
+	}
+
+	@Override
+	public void rightClick(IDrawable drawable) {
+		repaint();
 	}
 }

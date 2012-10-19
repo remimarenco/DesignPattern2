@@ -6,14 +6,14 @@ import java.awt.Point;
 
 public class KoalaDrawable extends MarsupialDrawable {
 
-	public KoalaDrawable(Color color, Point pos, Dimension dim, String nom) {
-		super(color, pos, dim);
+	public KoalaDrawable(IDrawable drawable, String nom) {
+		
+		super(drawable);
 		
 		//on creait un koala
-		this.marsupial=new Koala(nom);
+	    this.marsupial=new Koala(nom);
 		
 	}
-	
 	
 	
 	@Override

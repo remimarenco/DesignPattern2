@@ -6,15 +6,14 @@ import java.awt.Point;
 
 public class OpossumDrawable extends MarsupialDrawable {
 
-	public OpossumDrawable(Color color, Point pos, Dimension dim, String nom) {
-		super(color, pos, dim);
+	public OpossumDrawable(IDrawable drawable, String nom) {
 		
-		//on creait un oppossum
-		this.marsupial=new Opossum(nom);
+		super(drawable);
+		
+		//on creait un koala
+	    this.marsupial=new Opossum(nom);
 		
 	}
-	
-	
 	
 	@Override
 	public  void draw(Graphics g) {

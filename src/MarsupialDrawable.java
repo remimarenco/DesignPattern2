@@ -9,8 +9,10 @@ public abstract class  MarsupialDrawable extends FormDrawable {
 	protected Marsupial marsupial;
 	// TODO: Double-enveloppe
 	
-	public MarsupialDrawable(Color color, Point pos, Dimension dim) {
-		super(color, pos, dim);
+
+	public MarsupialDrawable(IDrawable drawable) {
+		
+		super(Color.RED, drawable.getRectangle().getLocation(), drawable.getRectangle().getSize());
 		
 	}
 

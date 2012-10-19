@@ -98,7 +98,7 @@ public class JCanvas extends JPanel implements ISimpleMouseObservateur,INonOverl
 	public IDrawable createDrawable(Point p) {
 		Dimension dim = new Dimension(40, 40);
 
-		return new KoalaDrawable(null, p, dim, "");
+		return new MovableDrawable();
 	}
 	
 	public IDrawable getDrawableFromPoint(Point p)

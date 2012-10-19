@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class JCanvas extends JPanel implements ISimpleMouseObservateur,INonOverlapMouseAdapterObservateur{
+public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateur,INonOverlapMouseAdapterObservateur{
 	protected Mediator mediator;
 	protected IMovableDrawable drawable;
 	protected Point initialLocation;

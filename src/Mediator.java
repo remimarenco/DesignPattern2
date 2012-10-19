@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Observable;
 
 
-public class Mediator implements ISimpleMouseObservateur, ISimpleMouseObservable ,INonOverlapMouseAdapterObservateur, INonOverlapMouseAdapterObservable{
+public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpleMouseMediatorVueObservable ,INonOverlapMouseAdapterObservateur, INonOverlapMouseAdapterObservable{
 	protected List<MarsupialDrawable> lMarsupialDrawable = new ArrayList<MarsupialDrawable>();
-	protected List<ISimpleMouseObservateur> smoObs = new ArrayList<ISimpleMouseObservateur>();
+	protected List<ISimpleMouseMediatorVueObservateur> smoObs = new ArrayList<ISimpleMouseMediatorVueObservateur>();
 	protected List<INonOverlapMouseAdapterObservateur> nomaObs = new ArrayList<INonOverlapMouseAdapterObservateur>();
 	protected JCanvas jc;
 	protected Fenetre fenetre;
@@ -50,11 +50,13 @@ public class Mediator implements ISimpleMouseObservateur, ISimpleMouseObservable
 	// ----------- SimpleMouseEvents ------------- //
 
 	@Override
-	public void leftClick(IDrawable drawable) {
+	public void leftClick(Point point) {
 		// Demande de vérification si on a cliqué sur un objet existant ou non
 		// TODO:Trouver une autre solution
-		if(jc.isFree(drawable.getRectangle()))
+		IDrawable drawable = jc.getDrawableFromPoint(point);
+		if(drawable == null)
 		{
+			drawable = jc.createDrawable(point);
 			notifierLeftClick(drawable);
 		}
 		else
@@ -76,10 +78,11 @@ public class Mediator implements ISimpleMouseObservateur, ISimpleMouseObservable
 	}
 	
 	@Override
-	public void rightClick(IDrawable drawable) {
+	public void rightClick(Point point) {
+		
+		IDrawable drawable = jc.getDrawableFromPoint(point);
 		// On récupère l'élèment drawable de la vue
 		lMarsupialDrawable.remove(drawable);
-		
 		// TODO : Modifier en notification clickDroit
 		notifierRightClick(drawable);
 	}
@@ -87,7 +90,7 @@ public class Mediator implements ISimpleMouseObservateur, ISimpleMouseObservable
 	@Override
 	public void notifierLeftClick(IDrawable drawable) {
 		// TODO Auto-generated method stub
-		for(ISimpleMouseObservateur obs : smoObs)
+		for(ISimpleMouseMediatorVueObservateur obs : smoObs)
 		{
 			obs.leftClick(drawable);
 		}
@@ -96,7 +99,7 @@ public class Mediator implements ISimpleMouseObservateur, ISimpleMouseObservable
 	@Override
 	public void notifierRightClick(IDrawable drawable) {
 		// TODO Auto-generated method stub
-		for(ISimpleMouseObservateur obs : smoObs)
+		for(ISimpleMouseMediatorVueObservateur obs : smoObs)
 		{
 			obs.rightClick(drawable);
 		}
@@ -125,14 +128,14 @@ public class Mediator implements ISimpleMouseObservateur, ISimpleMouseObservable
 	public void ajouterObservateur(IObservateur obs) {
 		//TODO : Refaire des fonctions précises sans switch
 		nomaObs.add((INonOverlapMouseAdapterObservateur)obs);
-		smoObs.add((ISimpleMouseObservateur) obs);
+		smoObs.add((ISimpleMouseMediatorVueObservateur) obs);
 	}
 
 	@Override
 	public void supprimerObservateur(IObservateur obs) {
 		//TODO : Refaire des fonctions précises sans switch
 		nomaObs.remove((INonOverlapMouseAdapterObservateur)obs);
-		smoObs.remove((ISimpleMouseObservateur) obs);
+		smoObs.remove((ISimpleMouseMediatorVueObservateur) obs);
 	}
 
 	@Override

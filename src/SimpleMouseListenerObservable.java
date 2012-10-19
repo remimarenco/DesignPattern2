@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SimpleMouseListenerObservable extends SimpleMouseListener implements ISimpleMouseObservable {
-	private List<ISimpleMouseObservateur> observateurs = new ArrayList<ISimpleMouseObservateur>();
+public class SimpleMouseListenerObservable extends SimpleMouseListener implements ISimpleMouseMediatorListenerObservable {
+	private List<ISimpleMouseMediatorListenerObservateur> observateurs = new ArrayList<ISimpleMouseMediatorListenerObservateur>();
 	
 	public SimpleMouseListenerObservable(JCanvas canvas) {
 		super(canvas);
@@ -15,7 +15,7 @@ public class SimpleMouseListenerObservable extends SimpleMouseListener implement
 		super.rightClickAction(e);
 		Point p = e.getPoint();
 		IDrawable drawable = canvas.getDrawableFromPoint(p);
-		notifierRightClick(drawable);
+		notifierRightClick(p);
 	}
 
 	protected void leftClickAction(MouseEvent e) {
@@ -26,19 +26,19 @@ public class SimpleMouseListenerObservable extends SimpleMouseListener implement
 		{
 			drawable = canvas.createDrawable(p);
 		}
-		notifierLeftClick(drawable);
+		notifierLeftClick(p);
 	}
 
 	@Override
 	public void ajouterObservateur(IObservateur obs) {
 		// TODO Auto-generated method stub
-		observateurs.add((ISimpleMouseObservateur)obs);
+		observateurs.add((ISimpleMouseMediatorListenerObservateur)obs);
 	}
 
 	@Override
 	public void supprimerObservateur(IObservateur obs) {
 		// TODO Auto-generated method stub
-		observateurs.remove((ISimpleMouseObservateur)obs);
+		observateurs.remove((ISimpleMouseMediatorListenerObservateur)obs);
 	}
 
 	@Override
@@ -48,18 +48,18 @@ public class SimpleMouseListenerObservable extends SimpleMouseListener implement
 	}
 
 	@Override
-	public void notifierLeftClick(IDrawable drawable) {
-		for(ISimpleMouseObservateur obs : observateurs)
+	public void notifierLeftClick(Point point) {
+		for(ISimpleMouseMediatorListenerObservateur obs : observateurs)
 		{
-			obs.leftClick(drawable);
+			obs.leftClick(point);
 		}
 	}
 
 	@Override
-	public void notifierRightClick(IDrawable drawable) {
-		for(ISimpleMouseObservateur obs : observateurs)
+	public void notifierRightClick(Point point) {
+		for(ISimpleMouseMediatorListenerObservateur obs : observateurs)
 		{
-			obs.rightClick(drawable);
+			obs.rightClick(point);
 		}
 	}
 

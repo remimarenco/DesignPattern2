@@ -16,6 +16,7 @@ public abstract class FormDrawable implements IMovableDrawable  {
 		setPosition(pos);
 		
 	}
+
 	public abstract void draw(Graphics g) ;
 	
 	
@@ -35,6 +36,13 @@ public abstract class FormDrawable implements IMovableDrawable  {
 		rect.x = (p.x-rect.width/2);
 		rect.y = (p.y-rect.height/2);
 
+	}
+	
+	public Color getColor() {
+		return color;
+	}
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
 }

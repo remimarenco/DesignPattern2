@@ -7,32 +7,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import javax.swing.JPanel;
+
 
 public class Mediator implements ISimpleMouseObservateur, INonOverlapMouseAdapterObservateur, INonOverlapMouseAdapterObservable{
 	protected List<MarsupialDrawable> lMarsupialDrawable = new ArrayList<MarsupialDrawable>();
 	protected List<INonOverlapMouseAdapterObservateur> nomaObs = new ArrayList<INonOverlapMouseAdapterObservateur>();
 	protected JCanvas jc;
 	protected Fenetre fenetre;
+	protected JForm form;
 	
-	public Mediator(){		
-		//on crÃ©ait la fenetre
-		fenetre=new Fenetre(this);
+	public Mediator(){	
+		
+		
+		//on creait le canvas avec le mÃ©diator passÃ© en parametre
+		this.jc=new JCanvas(this);
+		
+		//on crÃ©ait le le form pour le passÃ© a la fenetre
+		this.form= new JForm();
+		
+		//on crÃ©ait la fenetre en passant le canvas et le form
+		Fenetre fenetre=new Fenetre(this,jc,form);
 				
-		//onrÃ©cupere le JCanvas de la fenetre
-		jc = fenetre.getCanvas();
+
 		SimpleMouseListenerObservable smlo = new SimpleMouseListenerObservable(jc);
 		smlo.ajouterObservateur(this);
 		NonOverlapMoveAdapterObservable nomao = new NonOverlapMoveAdapterObservable(jc);
 		nomao.ajouterObservateur(this);
 		
+		//on ajoute le anvas comme observateur sur le mediateur
 		this.ajouterObservateur(jc);
 		
-		//on crÃ©ait la fenetre
-		Fenetre fenetre2=new Fenetre(this);
+		
+		/*//on crÃ©ait la fenetre en passant le canvas et le form
+		Fenetre fenetre2=new Fenetre(this,canvas,form);
 				
 		//onrÃ©cupere le JCanvas de la fenetre
 		JCanvas jc2 = fenetre2.getCanvas();
-		this.ajouterObservateur(jc2);
+		this.ajouterObservateur(jc2);*/
 	}
 	
 	public JCanvas getCanvas()
@@ -50,32 +62,28 @@ public class Mediator implements ISimpleMouseObservateur, INonOverlapMouseAdapte
 
 	@Override
 	public void leftClick(MouseEvent e) {
-		// Demande de vérification si on a cliqué sur un objet existant ou non
+		// Demande de vï¿½rification si on a cliquï¿½ sur un objet existant ou non
 		IDrawable drawable = jc.getDrawableFromPoint(e.getPoint());
 		if(drawable == null)
 		{
 			jc.leftClickAction(e);
+			//TODO: retirÃ© cette  fonction et directement passer les parametres au left click
+			jc.addDrawable(jc.createDrawable(e, form.getRace(), form.getNom()));
 		}
 		else
 		{
-			// On change d'ï¿½tat
+			//on caste le drawable en MarsupialDrawable
 			MarsupialDrawable drawableM = (MarsupialDrawable) drawable;
-			Marsupial marsu = drawableM.getMarsupial();
-			marsu.changerEtat();
-			if(marsu.estReveille)
-			{
-				jc.changerCouleur(drawableM, Color.RED);
-			}
-			else
-			{
-				jc.changerCouleur(drawableM, Color.BLUE);
-			}
+			
+			//fonction qui va changer l'etat du marsu et sa couleur
+			drawableM.changerEtat();
+			
 		}
 	}
 
 	@Override
 	public void rightClick(MouseEvent e) {
-		// On récupère l'élèment drawable de la vue
+		// On rï¿½cupï¿½re l'ï¿½lï¿½ment drawable de la vue
 		jc.rightClickAction(e);
 
 		jc.actualiser();

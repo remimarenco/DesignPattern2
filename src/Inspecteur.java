@@ -4,7 +4,7 @@ import java.lang.Class;
 
 public class Inspecteur {
 	// On ï¿½vite de pouvoir instancier la classe
-	private Inspecteur(){
+	public Inspecteur(){
 	}	
 	
 	public static Object Invoquer(Object obj, String nomMethode, Object[] tabParams){
@@ -150,7 +150,7 @@ public class Inspecteur {
                                     //on parcout tous les arguments pour les comparer
                                     for(indice=0;indice<nbrArg;indice++)
                                     {
-                                            //si un des arguments ne correcpond pas on mais le booléen a faux
+                                            //si un des arguments ne correcpond pas on mais le boolï¿½en a faux
                                             if(!args[indice].getClass().isAssignableFrom(argsConstructeur[indice]))
                                             {
                                                     estCorrect=false;

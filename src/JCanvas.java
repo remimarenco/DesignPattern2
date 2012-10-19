@@ -82,19 +82,28 @@ public class JCanvas extends JPanel implements INonOverlapMouseAdapterObservateu
 		}
 		return true;
 	}
-	
+	//TODO: enlever le commentaire
 	protected void leftClickAction(MouseEvent e) {
 		Point p = e.getPoint();
-		IDrawable rect = createDrawable(e);
+		/*IDrawable rect = createDrawable(e);
 		if (this.isFree(rect.getRectangle())) {
 			this.addDrawable(rect);
-		}
+		}*/
 	}
 	
-	private IDrawable createDrawable(MouseEvent e) {
+	//TODO: Remettre en private
+	public IDrawable createDrawable(MouseEvent e,String nomC,String nomMarsu) {
 		Point p = e.getPoint();
 		Dimension dim = new Dimension(40, 40);
-		return new MarsupialDrawable(Color.RED, p, dim);
+		//on récupere le nom de la classe passez en parametre et on lui ajoute "Drawable"
+		String nomClasse=nomC+"Drawable";
+		
+		//on créait la liste d'argument pour l'inspecteur
+		Object[] args={Color.RED, p, dim,nomMarsu};
+		
+		//on créait un inspecteur puis on appelle la fonction getObject pour créait un marsu en fonction du nom de la classe
+		Inspecteur inspecteur=new Inspecteur();
+		return (IDrawable) inspecteur.getObject(nomClasse, args) ;
 	}
 	
 	public IDrawable getDrawableFromPoint(Point p)

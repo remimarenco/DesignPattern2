@@ -4,23 +4,36 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 
-public class MarsupialDrawable extends FormDrawable {
-	protected Marsupial marsupial = new Koala("Hedi le malade");
+public abstract class  MarsupialDrawable extends FormDrawable {
+	
+	protected Marsupial marsupial;
 	// TODO: Double-enveloppe
 	
 	public MarsupialDrawable(Color color, Point pos, Dimension dim) {
 		super(color, pos, dim);
 	}
 
+	//Fonction qui sera redefinie par les classe fille pour dessiné une forme en fonction de la race 
 	@Override
-	public void draw(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(color);
-		g.fillRect(rect.x,rect.y,rect.height,rect.width);
-		g.setColor(c);
-	}
+	public  abstract void draw(Graphics g);
 
 	public Marsupial getMarsupial() {
 		return this.marsupial;
+	}
+	
+	//fonction qui va changer la couleur du dessin du marsu puis changer l'etat du marsu
+	public  void changerEtat() {
+		
+		//on change la couleur 
+		if(this.marsupial.getEstReveille())
+		{
+			this.setColor(Color.RED);
+		} else {
+			this.setColor(Color.BLUE);
+		}
+		//on change l'etat
+		marsupial.changerEtat();
+		
+		
 	}
 }

@@ -20,6 +20,12 @@ public class OpossumDrawable extends MarsupialDrawable {
 		Color c = g.getColor();
 		g.setColor(color);
 		g.fillRect(rect.x,rect.y,rect.height,rect.width);
+		//couleur noir pour le texte
+		g.setColor(Color.black);
+		//afficher le nom
+		g.drawString(this.marsupial.getNom(),rect.x,rect.y);
+		//afficher l'etat
+		g.drawString(this.marsupial.getLibelleEtat(),rect.x,rect.y+(rect.width/2));
 		g.setColor(c);
 	}
 

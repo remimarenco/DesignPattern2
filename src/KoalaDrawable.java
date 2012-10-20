@@ -21,7 +21,12 @@ public class KoalaDrawable extends MarsupialDrawable {
 		Color c = g.getColor();
 		g.setColor(color);
 		g.fillOval(rect.x,rect.y,rect.height,rect.width);
-		g.drawString("Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",0,0);
+		//couleur noir pour le texte
+		g.setColor(Color.black);
+		//afficher le nom
+		g.drawString(this.marsupial.getNom(),rect.x,rect.y);
+		//afficher l'etat
+		g.drawString(this.marsupial.getLibelleEtat(),rect.x,rect.y+(rect.width/2));
 		g.setColor(c);
 	}
 

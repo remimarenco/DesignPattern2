@@ -19,11 +19,14 @@ import IHM.ISimpleMouseMediatorListenerObservateur;
 import IHM.ISimpleMouseMediatorVueObservable;
 import IHM.ISimpleMouseMediatorVueObservateur;
 import IHM.JCanvas;
+import IHM.JForm;
+import IHM.MarsupialDrawable;
 import IHM.NonOverlapMoveAdapterObservable;
 import IHM.SimpleMouseListenerObservable;
 import Metier.IObservateur;
+import Metier.Inspecteur;
 import Metier.Marsupial;
-import Metier.MarsupialDrawable;
+import javax.swing.JPanel;
 
 
 public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpleMouseMediatorVueObservable ,INonOverlapMouseAdapterObservateur, INonOverlapMouseAdapterObservable{
@@ -32,26 +35,32 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 	protected List<INonOverlapMouseAdapterObservateur> nomaObs = new ArrayList<INonOverlapMouseAdapterObservateur>();
 	protected JCanvas jc;
 	protected Fenetre fenetre;
+	protected JForm form;
 	
-	public Mediator(){		
-		//on créait la fenetre
-		fenetre=new Fenetre(this);
-				
-		//on récupere le JCanvas de la fenetre
-		jc = fenetre.getCanvas();
+	public Mediator(){
+		//on creait le canvas avec le médiator passé en parametre
+		this.jc=new JCanvas(this);
+		
+		//on créait le le form pour le passé a la fenetre
+		this.form= new JForm();
+		
+		//on créait la fenetre en passant le canvas et le form
+		Fenetre fenetre=new Fenetre(this,jc,form);
+
 		SimpleMouseListenerObservable smlo = new SimpleMouseListenerObservable(jc);
 		smlo.ajouterObservateur(this);
 		NonOverlapMoveAdapterObservable nomao = new NonOverlapMoveAdapterObservable(jc);
 		nomao.ajouterObservateur(this);
 		
+		//on ajoute le anvas comme observateur sur le mediateur
 		this.ajouterObservateur(jc);
 		
 		//on créait la fenetre
-		Fenetre fenetre2=new Fenetre(this);
+		//Fenetre fenetre2=new Fenetre(this, jc, form);
 				
 		//onrécupere le JCanvas de la fenetre
-		JCanvas jc2 = fenetre2.getCanvas();
-		this.ajouterObservateur(jc2);
+		//JCanvas jc2 = fenetre2.getCanvas();
+		//this.ajouterObservateur(jc2);
 	}
 	
 	public JCanvas getCanvas()
@@ -75,11 +84,24 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 		if(drawable == null)
 		{
 			drawable = jc.createDrawable(point);
+
+			//on récupere le nom de la classe passez en parametre et on lui ajoute "Drawable"
+			String nomC = "IHM."+form.getRace()+"Drawable";
+			
+			//on créait la liste d'argument pour l'inspecteur
+			Object[] args={drawable, form.getNom()};
+			
+			//on créait un inspecteur puis on appelle la fonction getObject pour créait un marsu en fonction du nom de la classe
+			Inspecteur inspecteur=new Inspecteur();
+			IDrawable nouveauDrawable = (IDrawable) inspecteur.getObject(nomC, args) ;
 			notifierLeftClick(drawable);
+			
+			//TODO: retiré cette  fonction et directement passer les parametres au left click
+			
 		}
 		else
 		{
-			// On change d'�tat
+			// On change d'�tat
 			MarsupialDrawable drawableM = (MarsupialDrawable) drawable;
 			Marsupial marsu = drawableM.getMarsupial();
 			marsu.changerEtat();
@@ -97,9 +119,8 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 	
 	@Override
 	public void rightClick(Point point) {
-		
 		IDrawable drawable = jc.getDrawableFromPoint(point);
-		// On r�cup�re l'�l�ment drawable de la vue
+		// On r�cup�re l'�l�ment drawable de la vue
 		lMarsupialDrawable.remove(drawable);
 		// TODO : Modifier en notification clickDroit
 		notifierRightClick(drawable);
@@ -144,14 +165,14 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 
 	@Override
 	public void ajouterObservateur(IObservateur obs) {
-		//TODO : Refaire des fonctions pr�cises sans switch
+		//TODO : Refaire des fonctions pr�cises sans switch
 		nomaObs.add((INonOverlapMouseAdapterObservateur)obs);
 		smoObs.add((ISimpleMouseMediatorVueObservateur) obs);
 	}
 
 	@Override
 	public void supprimerObservateur(IObservateur obs) {
-		//TODO : Refaire des fonctions pr�cises sans switch
+		//TODO : Refaire des fonctions pr�cises sans switch
 		nomaObs.remove((INonOverlapMouseAdapterObservateur)obs);
 		smoObs.remove((ISimpleMouseMediatorVueObservateur) obs);
 	}
@@ -192,5 +213,20 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 	public Iterator<MarsupialDrawable> marsuDrawIterator()
 	{
 		return lMarsupialDrawable.iterator();
+	}
+	
+	public void addMarsu(IDrawable drawable)
+	{
+		lMarsupialDrawable.add((MarsupialDrawable)drawable);
+	}
+	
+	public void removeMarsu(IDrawable drawable)
+	{
+		lMarsupialDrawable.remove(drawable);
+	}
+	
+	public void clearMarsu()
+	{
+		lMarsupialDrawable.clear();
 	}
 }

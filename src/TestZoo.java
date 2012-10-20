@@ -74,6 +74,9 @@ public class TestZoo {
 		System.out.println(bernard.getNom());*/
 		
 		Mediator mediator = new Mediator();
+		
+
+		
 	}
 
 }

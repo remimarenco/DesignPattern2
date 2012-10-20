@@ -18,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Controleur.Mediator;
-import Metier.MarsupialDrawable;
 
 
 public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateur,INonOverlapMouseAdapterObservateur{
@@ -46,19 +45,19 @@ public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateu
 
 	public void addDrawable(IDrawable d) {
 		MarsupialDrawable dm = (MarsupialDrawable) d;
-		mediator.lMarsupialDrawable.add(dm);
+		mediator.addMarsu(dm);
 		repaint();
 	}
 
 	public void removeDrawable(IDrawable d) {
 		MarsupialDrawable dm = (MarsupialDrawable) d;
-		mediator.lMarsupialDrawable.remove(d);
+		mediator.removeMarsu(dm);
 		repaint();
 	}
 	
 	public List findDrawables(Point p) {
 		List l = new ArrayList();
-		for (Iterator iter = mediator.lMarsupialDrawable.iterator(); iter.hasNext();) {
+		for (Iterator iter = mediator.marsuDrawIterator(); iter.hasNext();) {
 			IDrawable element = (IDrawable) iter.next();
 			if(element.getRectangle().contains(p)){
 				l.add(element);
@@ -68,7 +67,7 @@ public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateu
 	}
 	
 	public boolean isFree(Rectangle rect) {
-		for (Iterator iter = mediator.lMarsupialDrawable.iterator(); iter.hasNext();) {
+		for (Iterator iter = mediator.marsuDrawIterator(); iter.hasNext();) {
 			IDrawable element = (IDrawable) iter.next();
 			if(element.getRectangle().intersects(rect)){
 				return false;
@@ -79,7 +78,7 @@ public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateu
 	
 	public boolean isAlone(IDrawable drawable) {
 		Rectangle rect = drawable.getRectangle();
-		for (Iterator iter = mediator.lMarsupialDrawable.iterator(); iter.hasNext();) {
+		for (Iterator iter = mediator.marsuDrawIterator(); iter.hasNext();) {
 			IDrawable element = (IDrawable) iter.next();
 			if(!element.equals(drawable) &&  element.getRectangle().intersects(rect)) {
 				return false;
@@ -87,18 +86,23 @@ public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateu
 		}
 		return true;
 	}
-	
+	//TODO: enlever le commentaire
 	protected void leftClickAction(MouseEvent e) {
 		Point p = e.getPoint();
+		/*IDrawable rect = createDrawable(e);
+=======
 		IDrawable rect = createDrawable(p);
+>>>>>>> cff80ee74faa82b1bdf2e848352587846fb4a4e7
 		if (this.isFree(rect.getRectangle())) {
 			this.addDrawable(rect);
-		}
+		}*/
 	}
 	
+	//TODO: Remettre en private
 	public IDrawable createDrawable(Point p) {
 		Dimension dim = new Dimension(40, 40);
-		return new MarsupialDrawable(Color.RED, p, dim);
+
+		return new MovableDrawable();
 	}
 	
 	public IDrawable getDrawableFromPoint(Point p)
@@ -110,7 +114,7 @@ public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateu
 	}
 
 	public void clear() {
-		mediator.lMarsupialDrawable.clear();
+		mediator.clearMarsu();
 		repaint();
 	}
 
@@ -159,24 +163,28 @@ public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateu
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e, IMovableDrawable d) {
-		// TODO Auto-generated method stub
-		if (drawable != null) {
+	public void mouseDragged(MouseEvent e, IMovableDrawable d){
+		if(drawable != null)
+		{
 			drawable.setPosition(e.getPoint());
 			this.repaint();
 		}
 	}
 
 	@Override
-	public void leftClick(IDrawable drawable) {
-		if (this.isFree(drawable.getRectangle())) {
+	public void leftClick(IDrawable e) {
+		// TODO Auto-generated method stub
+		if(this.isFree(drawable.getRectangle()))
+		{
 			this.addDrawable(drawable);
 		}
-		repaint();
 	}
 
 	@Override
-	public void rightClick(IDrawable drawable) {
+	public void rightClick(IDrawable e) {
+		// TODO Auto-generated method stub
 		repaint();
 	}
+	
+	
 }

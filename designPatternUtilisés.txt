@@ -1,0 +1,12 @@
+
+
+Pattern Strategy:
+	 -Marsupial, ComportementSommeil, SommeilNied et SommeilQueue
+
+Pattern Obervateur:
+	-interface: Iobservateur, IObservable
+	
+Pattern Decorateur:
+	-MrsupialDrawable Marsupial
+
+

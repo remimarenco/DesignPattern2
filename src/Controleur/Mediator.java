@@ -30,7 +30,8 @@ import javax.swing.JPanel;
 
 /**
  * Classe Mediator, permettant de traiter les échanges entre la partie métier et IHM selon 
- * le pattern MVC
+ * le pattern MVC.
+ * Design pattern : MVC / Mediator, Observateur,
  * @author RemiPortable
  *
  */
@@ -73,6 +74,7 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 		this.ajouterObservateur(jc);
 		
 		// Test de fonctionnement du couplage faible sur les évènements
+		// au travers de la création d'une nouvelle fenetre miroir de la première
 		JForm jf2 = new JForm();
 		//onrÃ©cupere le JCanvas de la fenetre
 		JCanvas jc2 = new JCanvas(this);
@@ -88,18 +90,23 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 	}
 
 	@Override
-	public void actualiser(Object objet) {
-		// TODO Auto-generated method stub
-		
+	public void actualiser(Object objet) {		
 	}
 	
 	// ----------- SimpleMouseEvents ------------- //
 
+	/*
+	 * Méthode permettant de récupérer le click gauche depuis un listener de SimpleMouse
+	 * Permet de créer une AnimalDrawable et notifie les IHM abonné d'un click gauche
+	 * (non-Javadoc)
+	 * @see IHM.ISimpleMouseMediatorListenerObservateur#leftClick(java.awt.Point)
+	 */
 	@Override
 	public void leftClick(Point point) {
-		// Demande de vérification si on a cliqué sur un objet existant ou non
-		// TODO:Trouver une autre solution
+		// Vérification si on a cliqué sur un objet existant ou non
 		IDrawable drawable = jc.getDrawableFromPoint(point);
+		// Si l'objet n'existe pas, on créé un drawable à l'aide d'un inspecteur
+		// puis on notifie la vue que l'on a fait un click gauche
 		if(drawable == null)
 		{
 			drawable = jc.createDrawable(point);
@@ -118,6 +125,8 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 			//TODO: retirÃ© cette  fonction et directement passer les parametres au left click
 			
 		}
+		// Sinon on change d'état sur le drawable, puis on notifie la vue que l'on a fait
+		// un click gauche
 		else
 		{
 			// On change d'ï¿½tat
@@ -127,15 +136,27 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 		}
 	}
 	
+	/*
+	 * Permet de récupérer le click droit depuis les listener
+	 * On retire le drawable de la liste puis on notifie les IHM que l'on a recu un click droit
+	 * (non-Javadoc)
+	 * @see IHM.ISimpleMouseMediatorListenerObservateur#rightClick(java.awt.Point)
+	 */
 	@Override
 	public void rightClick(Point point) {
-		IDrawable drawable = jc.getDrawableFromPoint(point);
 		// On rï¿½cupï¿½re l'ï¿½lï¿½ment drawable de la vue
+		IDrawable drawable = jc.getDrawableFromPoint(point);
 		lMarsupialDrawable.remove(drawable);
 		// TODO : Modifier en notification clickDroit
 		notifierRightClick(drawable);
 	}
 	
+	/*
+	 * Pattern observateur, partie observable pour notifier les vues sur l'évènement
+	 * SimpleMouse
+	 * (non-Javadoc)
+	 * @see IHM.ISimpleMouseMediatorVueObservable#notifierLeftClick(IHM.IDrawable)
+	 */
 	@Override
 	public void notifierLeftClick(IDrawable drawable) {
 		// TODO Auto-generated method stub
@@ -144,7 +165,13 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 			obs.leftClick(drawable);
 		}
 	}
-
+	
+	/*
+	 * Pattern observateur, partie observable pour notifier les vues sur l'évènement
+	 * SimpleMouse
+	 * (non-Javadoc)
+	 * @see IHM.ISimpleMouseMediatorVueObservable#notifierRightClick(IHM.IDrawable)
+	 */
 	@Override
 	public void notifierRightClick(IDrawable drawable) {
 		// TODO Auto-generated method stub
@@ -155,31 +182,61 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 	}
 	
 	// ---------- MouseMotionEvents Observation --------- //
-
+	
+	/*
+	 * Pattern observateur, partie observateur pour récupérer les évènements
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see IHM.INonOverlapMouseAdapterObservateur#mouseReleased(java.awt.event.MouseEvent, IHM.IMovableDrawable, java.awt.Point)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e, IMovableDrawable d, Point p) {
 		notifierMouseReleased(e, d, p);		
 	}
-
+	
+	/*
+	 * Pattern observateur, partie observateur pour récupérer les évènements
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see IHM.INonOverlapMouseAdapterObservateur#mousePressed(java.awt.event.MouseEvent, IHM.IMovableDrawable, java.awt.Point)
+	 */
 	@Override
 	public void mousePressed(MouseEvent e, IMovableDrawable d, Point p) {
 		notifierMousePressed(e, d, p);
 	}
-
+	
+	/*
+	 * Pattern observateur, partie observateur pour récupérer les évènements
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see IHM.INonOverlapMouseAdapterObservateur#mouseDragged(java.awt.event.MouseEvent, IHM.IMovableDrawable)
+	 */
 	@Override
 	public void mouseDragged(MouseEvent e, IMovableDrawable d) {
 		notifierMouseDragged(e, d);
 	}
 	
 	// ---------- MouseMotionEvents Observable --------- //
-
+	
+	/*
+	 * Pattern observateur, partie observable pour notifier les vues sur l'évènement
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see Metier.IObservable#ajouterObservateur(Metier.IObservateur)
+	 */
 	@Override
 	public void ajouterObservateur(IObservateur obs) {
 		//TODO : Refaire des fonctions prï¿½cises sans switch
 		nomaObs.add((INonOverlapMouseAdapterObservateur)obs);
 		smoObs.add((ISimpleMouseMediatorVueObservateur) obs);
 	}
-
+	
+	/*
+	 * Pattern observateur, partie observable pour notifier les vues sur l'évènement
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see Metier.IObservable#supprimerObservateur(Metier.IObservateur)
+	 */
 	@Override
 	public void supprimerObservateur(IObservateur obs) {
 		//TODO : Refaire des fonctions prï¿½cises sans switch
@@ -187,12 +244,24 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 		smoObs.remove((ISimpleMouseMediatorVueObservateur) obs);
 	}
 
+	/*
+	 * Pattern observateur, partie observable pour notifier les vues sur l'évènement
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see Metier.IObservable#notifierObservateurs()
+	 */
 	@Override
 	public void notifierObservateurs() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/*
+	 * Pattern observateur, partie observable pour notifier les vues sur l'évènement
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see IHM.INonOverlapMouseAdapterObservable#notifierMouseReleased(java.awt.event.MouseEvent, IHM.IMovableDrawable, java.awt.Point)
+	 */
 	@Override
 	public void notifierMouseReleased(MouseEvent e, IMovableDrawable d, Point p) {
 		// TODO Auto-generated method stub
@@ -201,7 +270,13 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 			obs.mouseReleased(e, d, p);
 		}
 	}
-
+	
+	/*
+	 * Pattern observateur, partie observable pour notifier les vues sur l'évènement
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see IHM.INonOverlapMouseAdapterObservable#notifierMousePressed(java.awt.event.MouseEvent, IHM.IMovableDrawable, java.awt.Point)
+	 */
 	@Override
 	public void notifierMousePressed(MouseEvent e, IMovableDrawable d, Point p) {
 		// TODO Auto-generated method stub
@@ -210,7 +285,13 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 			obs.mousePressed(e, d, p);
 		}
 	}
-
+	
+	/*
+	 * Pattern observateur, partie observable pour notifier les vues sur l'évènement
+	 * MouseMotion
+	 * (non-Javadoc)
+	 * @see IHM.INonOverlapMouseAdapterObservable#notifierMouseDragged(java.awt.event.MouseEvent, IHM.IMovableDrawable)
+	 */
 	@Override
 	public void notifierMouseDragged(MouseEvent e, IMovableDrawable d) {
 		// TODO Auto-generated method stub
@@ -220,11 +301,17 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 		}
 	}	
 	
+	/*
+	 * Récupération de l'itérateur sur le parcours des marsupiaux iterator() 
+	 */
 	public Iterator<MarsupialDrawable> marsuDrawIterator()
 	{
 		return lMarsupialDrawable.iterator();
 	}
 	
+	/*
+	 * Ajout du marsupial
+	 */
 	public void addMarsu(IDrawable drawable)
 	{
 		lMarsupialDrawable.add((MarsupialDrawable)drawable);

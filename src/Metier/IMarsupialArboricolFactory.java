@@ -1,8 +1,12 @@
 package Metier;
 import java.util.List;
 
-
-
+/**
+ * Design pattern abstract factory
+ * Interface permettant de créer des marsupiaux 
+ * @author RemiPortable
+ *
+ */
 public interface IMarsupialArboricolFactory {
 	
 	//on declare une methode pour charque type de marsu

@@ -1,6 +1,11 @@
 package Metier;
 
-
+/**
+ * Design pattern adapter
+ * Classe abstraite permettant de définir le fonctionnement d'un marsupial adapteur
+ * @author RemiPortable
+ *
+ */
 public abstract class MarsupialAdapteur extends MarsupialSeul {
 	
 	protected Animal animalAdapte;

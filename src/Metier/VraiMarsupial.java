@@ -1,7 +1,11 @@
 package Metier;
 
-
-public class VraiMarsupial extends MarsupialSeul {
+/**
+ * Classe permettant de construire des vrais marsupiaux
+ * @author RemiPortable
+ *
+ */
+public abstract class VraiMarsupial extends MarsupialSeul {
 
 	public VraiMarsupial(String nom, ComportementSommeil cSommeil) {
 		super(nom, cSommeil);

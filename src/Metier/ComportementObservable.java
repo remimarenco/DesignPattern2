@@ -2,8 +2,12 @@ package Metier;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
+/**
+ * Design pattern Strategy
+ * Classe permettant d'implémenter le comportement observable
+ * @author RemiPortable
+ *
+ */
 public class ComportementObservable implements IObservable {
 	
 	List<IObservateur> listeObs;

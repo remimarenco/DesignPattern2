@@ -1,5 +1,10 @@
 package Metier;
 
+/**
+ * Classe de base d'Animal
+ * @author RemiPortable
+ *
+ */
 public abstract class Animal {
 	protected String nom;
 	

@@ -4,7 +4,11 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 
-
+/**
+ * Classe abstraite d'un listener sur MouseMotion
+ * @author RemiPortable
+ *
+ */
 public abstract class MoveDrawableMouseListener extends JCanvasMouseListener {
 	protected IMovableDrawable drawable;
 	

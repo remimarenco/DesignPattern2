@@ -1,6 +1,11 @@
 package Metier;
 
-
+/**
+ * Design pattern Strategy, Decorator, Observateur
+ * Classe permettant de créer des marsupiaux pouvant être observé
+ * @author RemiPortable
+ *
+ */
 public class MarsupialObservable extends Marsupial implements IObservable{
 	protected ComportementObservable cObservable;
 	protected Marsupial marsupial;

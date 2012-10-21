@@ -1,6 +1,10 @@
 package Metier;
 
-
+/**
+ * Classe Opossum
+ * @author RemiPortable
+ *
+ */
 public class Opossum extends VraiMarsupial {
 
 	public Opossum(String nom, ComportementSommeil cSommeil) {

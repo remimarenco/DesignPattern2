@@ -2,7 +2,12 @@ package Metier;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Design pattern Composite
+ * Classe permettant de gérer une liste de marsupiaux
+ * @author RemiPortable
+ *
+ */
 public class TroupeMarsupial extends Marsupial {
 
 	protected List<Marsupial> marsupiaux = new ArrayList<Marsupial>();

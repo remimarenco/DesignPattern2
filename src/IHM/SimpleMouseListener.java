@@ -7,7 +7,12 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 
-
+/**
+ * Design pattern Template Method
+ * Listener permettant de gérer l'observation d'un SimpleMouse
+ * @author RemiPortable
+ *
+ */
 public abstract class SimpleMouseListener extends JCanvasMouseListener {
 	public SimpleMouseListener(JCanvas canvas) {
 		super(canvas);

@@ -3,6 +3,11 @@ package Metier;
 import java.lang.reflect.*;
 import java.lang.Class;
 
+/**
+ * Classe permettant de faire l'introspection des classes
+ * @author RemiPortable
+ *
+ */
 public class Inspecteur {
 	// On �vite de pouvoir instancier la classe
 	public Inspecteur(){

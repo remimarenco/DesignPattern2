@@ -6,7 +6,12 @@ import java.awt.Point;
 
 import Metier.Opossum;
 
-
+/**
+ * Design pattern Template Method + Adaptation via le Marsupial
+ * Classe permettant de définir le comportement d'un Opossum Drawable
+ * @author RemiPortable
+ *
+ */
 public class OpossumDrawable extends MarsupialDrawable {
 
 	public OpossumDrawable(Point p, Dimension d, String nom) {

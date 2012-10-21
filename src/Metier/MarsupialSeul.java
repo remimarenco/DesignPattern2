@@ -1,6 +1,11 @@
 package Metier;
 
-
+/**
+ * Design pattern composite
+ * Classe abstraite permettant de créer une marsupial seul
+ * @author RemiPortable
+ *
+ */
 public abstract class MarsupialSeul extends Marsupial {
 
 	public MarsupialSeul(String nom) {

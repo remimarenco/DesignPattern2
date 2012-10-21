@@ -2,8 +2,12 @@ package Metier;
 
 import java.util.List;
 
-
-
+/**
+ * Classe permettant d'instancier les marsupiaux via la factory et non le programme
+ * de test
+ * @author RemiPortable
+ *
+ */
 public class MarsupialFactory implements IMarsupialArboricolFactory {
 	// On partage une variable entre les instances de la classe MarsupialFactory
 	private static MarsupialFactory instance;

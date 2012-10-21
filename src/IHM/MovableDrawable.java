@@ -3,8 +3,12 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-
-public class MovableDrawable implements IMovableDrawable {
+/**
+ * Implémentation d'un MovableDrawable en classe abstraite
+ * @author RemiPortable
+ *
+ */
+public abstract class MovableDrawable implements IMovableDrawable {
 
 	@Override
 	public void draw(Graphics g) {

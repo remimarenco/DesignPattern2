@@ -1,6 +1,11 @@
 package Metier;
 
-
+/**
+ * Design pattern adapter
+ * Permet d'adapter une girafe en marsupial
+ * @author RemiPortable
+ *
+ */
 public class GirafeAdapte extends MarsupialAdapteur {
 
 	public GirafeAdapte(String nom, ComportementSommeil cSommeil, Girafe girafe) {

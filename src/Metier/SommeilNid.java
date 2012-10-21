@@ -1,6 +1,11 @@
 package Metier;
 
-
+/**
+ * Design pattern Strategy et Template Method
+ * Comportement d'un sommeil dans le nid
+ * @author RemiPortable
+ *
+ */
 public class SommeilNid implements ComportementSommeil {
 
 	@Override

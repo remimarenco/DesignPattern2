@@ -1,5 +1,11 @@
 package Metier;
 
+/**
+ * Design pattern Strategy et Template Method
+ * Classe permettant de simuler le sommeil pendu par la queue
+ * @author RemiPortable
+ *
+ */
 public class SommeilQueue implements ComportementSommeil {
 
 	@Override

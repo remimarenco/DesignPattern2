@@ -7,8 +7,13 @@ import java.util.List;
 
 import Metier.IObservateur;
 
-
-
+/**
+ * Design pattern Observation et Template Method.
+ * Classe permettant d'etre observée pour relayer les informations de 
+ * MouseM avec gestion d'Overlap
+ * @author RemiPortable
+ *
+ */
 public class SimpleMouseListenerObservable extends SimpleMouseListener implements ISimpleMouseMediatorListenerObservable {
 	private List<ISimpleMouseMediatorListenerObservateur> observateurs = new ArrayList<ISimpleMouseMediatorListenerObservateur>();
 	

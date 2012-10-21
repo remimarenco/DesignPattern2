@@ -8,7 +8,13 @@ import java.util.List;
 import Metier.IObservateur;
 
 
-
+/**
+ * Design pattern Observation et Template Method.
+ * Classe permettant d''etre observée pour relayer les informations de MouseMotion avec gestion
+ * d'Overlap
+ * @author RemiPortable
+ *
+ */
 public class NonOverlapMoveAdapterObservable extends NonOverlapMoveAdapter
 		implements INonOverlapMouseAdapterObservable {
 	private List<INonOverlapMouseAdapterObservateur> observateurs = new ArrayList<INonOverlapMouseAdapterObservateur>();

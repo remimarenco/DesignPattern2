@@ -1,6 +1,10 @@
 package Metier;
 
-
+/**
+ * Classe abstraite permettant de définir ce qu'est un Marsupial
+ * @author RemiPortable
+ *
+ */
 public abstract class Marsupial extends Animal {
 	protected ComportementSommeil cSommeil;
 	

@@ -5,7 +5,12 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingUtilities;
 
 
-
+/**
+ * Design pattern Template Method
+ * Classe abstraite permettant d'implémenter le SimpleMouse sur un JCanvas
+ * @author RemiPortable
+ *
+ */
 public abstract class JCanvasMouseListener extends MouseAdapter {
 	protected JCanvas canvas;
 

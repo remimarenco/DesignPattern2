@@ -5,8 +5,11 @@ import java.awt.event.WindowEvent;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-
-
+/**
+ * Classe permettant d'afficher une fenetre
+ * @author RemiPortable
+ *
+ */
 public class GUIHelper {
 	public static void showOnFrame(JComponent component, String frameName) {
 		JFrame frame = new JFrame(frameName);

@@ -109,21 +109,16 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 		// puis on notifie la vue que l'on a fait un click gauche
 		if(drawable == null)
 		{
-			drawable = jc.createDrawable(point);
-
 			//on récupere le nom de la classe passez en parametre et on lui ajoute "Drawable"
 			String nomC = "IHM."+form.getRace()+"Drawable";
 			
 			//on créait la liste d'argument pour l'inspecteur
-			Object[] args={drawable, form.getNom()};
+			Object[] args={point, jc.getDimension(), form.getNom()};
 			
 			//on créait un inspecteur puis on appelle la fonction getObject pour créait un marsu en fonction du nom de la classe
 			Inspecteur inspecteur=new Inspecteur();
 			IDrawable nouveauDrawable = (IDrawable) inspecteur.getObject(nomC, args) ;
 			notifierLeftClick(nouveauDrawable);
-			
-			//TODO: retiré cette  fonction et directement passer les parametres au left click
-			
 		}
 		// Sinon on change d'�tat sur le drawable, puis on notifie la vue que l'on a fait
 		// un click gauche

@@ -14,10 +14,13 @@ import javax.swing.JTextField;
 import Controleur.Mediator;
 
 
-public class Fenetre extends JPanel {
-	
-	
-	
+/**
+ * Classe permettant de créer une fenetre graphique contenant le canvas de dessin
+ * et le formulaire pour entrer les données
+ * @author Hedi Tarchouni
+ *
+ */
+public class Fenetre extends JPanel {	
 	protected JCanvas canvas;
     protected JForm form;//	Jpanel qui contiendra la liste dÃ©roulante
 
@@ -54,6 +57,4 @@ public class Fenetre extends JPanel {
 	public void setForm(JForm form) {
 		this.form = form;
 	}
-	
-
 }

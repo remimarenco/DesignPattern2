@@ -4,8 +4,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 
-
-
+/**
+ * Classe permettant de dessiner une forme ovale
+ * @author RemiPortable
+ *
+ */
 public class CircleDrawable extends FormDrawable {
 
 	public CircleDrawable(Color color, Point pos, Dimension dim) {

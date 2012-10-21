@@ -19,18 +19,12 @@ public class SimpleMouseListenerObservable extends SimpleMouseListener implement
 	protected void rightClickAction(MouseEvent e) {
 		super.rightClickAction(e);
 		Point p = e.getPoint();
-		IDrawable drawable = canvas.getDrawableFromPoint(p);
 		notifierRightClick(p);
 	}
 
 	protected void leftClickAction(MouseEvent e) {
 		super.leftClickAction(e);
 		Point p = e.getPoint();
-		IDrawable drawable = canvas.getDrawableFromPoint(p);
-		if(drawable == null)
-		{
-			drawable = canvas.createDrawable(p);
-		}
 		notifierLeftClick(p);
 	}
 

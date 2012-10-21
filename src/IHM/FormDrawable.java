@@ -6,7 +6,11 @@ import java.awt.Point;
 import java.awt.Rectangle;
 
 
-
+/**
+ * Classe asbtraite permettant de de définir ce qu'est une forme dessinable
+ * @author RemiPortable
+ *
+ */
 public abstract class FormDrawable implements IMovableDrawable  {
 	protected Rectangle rect ;
 	protected Color color;
@@ -16,12 +20,9 @@ public abstract class FormDrawable implements IMovableDrawable  {
 		this.color=color;
 		this.rect = new Rectangle(dim);
 		setPosition(pos);
-		
 	}
 
-	public abstract void draw(Graphics g) ;
-	
-	
+	public abstract void draw(Graphics g) ;	
 	
 	public Rectangle getRectangle(){
 		return (Rectangle) rect.clone();
@@ -37,7 +38,6 @@ public abstract class FormDrawable implements IMovableDrawable  {
 	public void setPosition(Point p) {
 		rect.x = (p.x-rect.width/2);
 		rect.y = (p.y-rect.height/2);
-
 	}
 	
 	public Color getColor() {

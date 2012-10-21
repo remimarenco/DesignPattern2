@@ -7,8 +7,13 @@ import java.awt.Point;
 
 import Metier.Marsupial;
 
-
-public class  MarsupialDrawable extends FormDrawable {
+/**
+ * Design Pattern Template Method et Adapter
+ * Classe permettant de définir un MarsupialDrawable
+ * @author RemiPortable
+ *
+ */
+public abstract class  MarsupialDrawable extends FormDrawable {
 	
 	protected Marsupial marsupial;
 	// TODO: Double-enveloppe

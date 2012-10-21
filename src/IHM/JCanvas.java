@@ -19,11 +19,17 @@ import javax.swing.JPanel;
 
 import Controleur.Mediator;
 
-
+/**
+ * Design pattern MVC, Observable, Template Method
+ * Classe permettant de définir la vue du programme. Gère tous les aspects graphiques.
+ * @author RemiPortable
+ *
+ */
 public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateur,INonOverlapMouseAdapterObservateur{
 	protected Mediator mediator;
 	protected IMovableDrawable drawable;
 	protected Point initialLocation;
+	public Dimension dim = new Dimension(40, 40);
 	
 	public JCanvas(Mediator mediator)
 	{
@@ -100,11 +106,11 @@ public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateu
 	}
 	
 	//TODO: Remettre en private
-	public IDrawable createDrawable(Point p) {
+	/*public IDrawable createDrawable(Point p) {
 		Dimension dim = new Dimension(40, 40);
 
 		return new MarsupialDrawable(p,dim);
-	}
+	}*/
 	
 	public IDrawable getDrawableFromPoint(Point p)
 	{
@@ -187,5 +193,8 @@ public class JCanvas extends JPanel implements ISimpleMouseMediatorVueObservateu
 		repaint();
 	}
 	
-	
+	public Dimension getDimension()
+	{
+		return dim;
+	}
 }

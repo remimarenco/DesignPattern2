@@ -9,9 +9,9 @@ import Metier.Opossum;
 
 public class OpossumDrawable extends MarsupialDrawable {
 
-	public OpossumDrawable(IDrawable drawable, String nom) {
+	public OpossumDrawable(Point p, Dimension d, String nom) {
 		
-		super(drawable);
+		super(p, d);
 		//on creait un koala
 	    this.marsupial=new Opossum(nom);
 		

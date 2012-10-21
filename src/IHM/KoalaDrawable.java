@@ -7,16 +7,19 @@ import java.awt.Point;
 import Metier.Koala;
 
 
-
+/**
+ * Design pattern Template Method + Adaptation via le Marsupial
+ * Classe permettant de définir le comportement d'un Koala Drawable
+ * @author RemiPortable
+ *
+ */
 public class KoalaDrawable extends MarsupialDrawable {
 
-	public KoalaDrawable(IDrawable drawable, String nom) {
-		
-		super(drawable);
+	public KoalaDrawable(Point p, Dimension d, String nom) {
+		super(p, d);
 		
 		//on creait un koala
 	    this.marsupial=new Koala(nom);
-		
 	}
 	
 	

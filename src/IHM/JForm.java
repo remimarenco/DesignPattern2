@@ -10,6 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
+/**
+ * Classe permettant d'implémenter le formulaire de saisie d'un animal
+ * @author Hedi Tarchouni
+ *
+ */
 public class JForm extends JPanel {
 
 	

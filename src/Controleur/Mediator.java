@@ -28,11 +28,22 @@ import Metier.Inspecteur;
 import Metier.Marsupial;
 import javax.swing.JPanel;
 
-
+/**
+ * Classe Mediator, permettant de traiter les échanges entre la partie métier et IHM selon 
+ * le pattern MVC
+ * @author RemiPortable
+ *
+ */
 public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpleMouseMediatorVueObservable ,INonOverlapMouseAdapterObservateur, INonOverlapMouseAdapterObservable{
+	
+	// Liste de Marsupiaux dessinables
 	protected List<MarsupialDrawable> lMarsupialDrawable = new ArrayList<MarsupialDrawable>();
+	
+	// Liste des observateurs sur des évènements souris (L'IHM s'abonne dessus)
 	protected List<ISimpleMouseMediatorVueObservateur> smoObs = new ArrayList<ISimpleMouseMediatorVueObservateur>();
 	protected List<INonOverlapMouseAdapterObservateur> nomaObs = new ArrayList<INonOverlapMouseAdapterObservateur>();
+	
+	// Variables permettant de gérer une IHM
 	protected JCanvas jc;
 	protected Fenetre fenetre;
 	protected JForm form;
@@ -46,21 +57,29 @@ public class Mediator implements ISimpleMouseMediatorListenerObservateur, ISimpl
 		
 		//on crÃ©ait la fenetre en passant le canvas et le form
 		Fenetre fenetre=new Fenetre(this,jc,form);
-
+		
+		// Abonnement des listener sur la vue, et abonnement de notre mediator sur
+		// les listener.
+		// Permet d'éviter aux listeners de connaitre leurs voisins (On ajoute une deuxième IHM
+		// pour montrer l'utilité). Le couplage faible n'est pas entièrement terminé du fait que
+		// l'on référence notre premier canvas dans les autres fonctions du mediator. Il faudrait
+		// gérer une liste de Vue et la parcourir par exemple.
 		SimpleMouseListenerObservable smlo = new SimpleMouseListenerObservable(jc);
 		smlo.ajouterObservateur(this);
 		NonOverlapMoveAdapterObservable nomao = new NonOverlapMoveAdapterObservable(jc);
 		nomao.ajouterObservateur(this);
 		
-		//on ajoute le anvas comme observateur sur le mediateur
+		// on ajoute le canvas comme observateur sur le mediateur
 		this.ajouterObservateur(jc);
 		
-		//on crÃ©ait la fenetre
-		//Fenetre fenetre2=new Fenetre(this, jc, form);
-				
+		// Test de fonctionnement du couplage faible sur les évènements
+		JForm jf2 = new JForm();
 		//onrÃ©cupere le JCanvas de la fenetre
-		//JCanvas jc2 = fenetre2.getCanvas();
-		//this.ajouterObservateur(jc2);
+		JCanvas jc2 = new JCanvas(this);
+		//on crÃ©ait la fenetre
+		Fenetre fenetre2=new Fenetre(this, jc2, jf2);
+				
+		this.ajouterObservateur(jc2);
 	}
 	
 	public JCanvas getCanvas()
